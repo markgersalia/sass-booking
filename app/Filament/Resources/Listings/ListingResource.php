@@ -21,7 +21,7 @@ class ListingResource extends Resource
 {
     protected static ?string $model = Listing::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ListBullet;
 
     public static function form(Schema $schema): Schema
     {
