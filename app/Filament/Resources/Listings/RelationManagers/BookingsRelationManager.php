@@ -26,10 +26,13 @@ class BookingsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->components([
-                TextInput::make('user_id')
+            ->components([ 
+                Select::make('user_id')
+                    ->relationship(name: 'user', titleAttribute: 'name')
+                    ->searchable()
+                    ->loadingMessage('Loading authors...')
                     ->required()
-                    ->numeric(),
+                    ->columnSpanFull(), 
                 DateTimePicker::make('start_time')
                     ->required(),
                 DateTimePicker::make('end_time')
@@ -41,6 +44,7 @@ class BookingsRelationManager extends RelationManager
             'canceled' => 'Canceled',
             'completed' => 'Completed',
         ])
+        ->columnSpanFull()
                     ->default('pending')
                     ->required(),
                 Textarea::make('notes')
@@ -53,7 +57,7 @@ class BookingsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('bookings')
             ->columns([
-                TextColumn::make('user_id')
+                TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('start_time')
