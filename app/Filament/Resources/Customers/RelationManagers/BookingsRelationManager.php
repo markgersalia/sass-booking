@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\Listings\RelationManagers;
+namespace App\Filament\Resources\Customers\RelationManagers;
 
 use App\Filament\Resources\Bookings\Schemas\BookingForm;
 use App\Filament\Resources\Bookings\Tables\BookingsTable;
-use App\Models\Booking;
 use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -13,10 +12,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DissociateAction;
 use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
@@ -29,7 +25,7 @@ class BookingsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->components(BookingForm::schema(true));
+            ->components(BookingForm::schema('customers'));
     }
 
     public function table(Table $table): Table
@@ -37,7 +33,8 @@ class BookingsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('bookings')
             ->columns(
-                BookingsTable::schema())
+                BookingsTable::schema()
+            )
             ->filters([
                 //
             ])

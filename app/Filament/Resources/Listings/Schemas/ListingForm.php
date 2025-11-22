@@ -4,9 +4,11 @@ namespace App\Filament\Resources\Listings\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -19,7 +21,8 @@ class ListingForm
                 Section::make()->schema([
                     TextInput::make('title')
                         ->required(),
-                    Textarea::make('description')
+                    RichEditor::make('description')
+                        
                         ->columnSpanFull(),
                     Select::make('type')
                         ->options([
@@ -39,9 +42,14 @@ class ListingForm
                     TextInput::make('price')
                         ->numeric()
                         ->prefix('$'), 
+                        Toggle::make('is_always_available')
+                    ->label('Always Available')
+                    ->reactive(),
                     DateTimePicker::make('available_from')
+                        ->hidden(fn (callable $get) => $get('is_always_available'))
                         ->required(),
                     DateTimePicker::make('available_to')
+                        ->hidden(fn (callable $get) => $get('is_always_available'))
                         ->required(),
                 ])->columnSpan(2),
                 Section::make()->schema([

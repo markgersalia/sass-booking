@@ -18,7 +18,10 @@ class Listing extends Model
         'price',   // optional
         'available_from', // optional JSON or boolean
         'available_to', // optional JSON or boolean
+        'is_always_available', // optional JSON or boolean
     ];
+
+    protected $appends = ['availability'];
 
     protected $casts = [
         'images' => 'array'
@@ -27,5 +30,12 @@ class Listing extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function getAvailabilityAttribute(){
+        if($this->is_always_available){
+            return "Always Available";
+        }
+        return "Available on:" . $this->available_from . " to " . $this->available_to;
     }
 } 

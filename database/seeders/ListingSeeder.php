@@ -14,24 +14,43 @@ class ListingSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        $types = [
-            'room', 'service', 'event', 'apartment', 'house', 
-            'studio', 'transport', 'equipment', 'experience', 'misc'
+{
+           $typeTitles = [
+            'room' => ['Deluxe Room', 'Cozy Private Room', 'Modern Guest Room'],
+            'service' => ['Premium Cleaning Service', 'Car Wash Package', 'Massage Service'],
+            'event' => ['Corporate Event Hall', 'Wedding Venue', 'Birthday Party Space'],
+            'apartment' => ['1BR City Apartment', 'Modern Loft Apartment', 'Penthouse Suite'],
+            'house' => ['Family Home Rental', 'Modern Smart House', 'Suburban Home'],
+            'studio' => ['Creative Art Studio', 'Photography Studio', 'Sound Recording Studio'],
+            'transport' => ['Car Rental', 'Motorbike Rental', 'Private Van Service'],
+            'equipment' => ['Camera Equipment Rental', 'Construction Tools Rental', 'Sound System Rental'],
+            'experience' => ['City Tour Experience', 'Mountain Hiking Package', 'Diving Experience'],
+            'misc' => ['General Rental Item', 'Basic Package', 'Custom Misc Service'],
+            'medical' => ['Medical Checkup', 'Dental Checkup', 'Laboratory Test Package']
         ];
 
-        for ($i = 1; $i <= 20; $i++) {
-            DB::table('listings')->insert([
-                'images' => 'https://via.placeholder.com/400x300?text=Listing+' . $i,
-                'title' => 'Sample Listing ' . $i,
-                'description' => 'This is a description for listing ' . $i,
-                'type' => $types[array_rand($types)],
-                'price' => rand(500, 5000),
-                'available_from' => Carbon::now()->addDays(rand(0, 30)),
-                'available_to' => Carbon::now()->addDays(rand(31, 60)),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }
+    // Add medical into types list
+    $types = array_keys($typeTitles);
+
+    for ($i = 1; $i <= 20; $i++) {
+
+        // Random type
+        $type = $types[array_rand($types)];
+        // Title depends on type
+        $title = $typeTitles[$type][array_rand($typeTitles[$type])];
+
+        DB::table('listings')->insert([
+            // 'images' => 'https://via.placeholder.com/400x300?text=' . urlencode($title),
+            'title' => $title,
+            'description' => 'This is a description for ' . strtolower($title),
+            'type' => $type,
+            'price' => rand(500, 5000),
+            'available_from' => Carbon::now()->addDays(rand(0, 30)),
+            'available_to' => Carbon::now()->addDays(rand(31, 60)),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
+}
+
 }

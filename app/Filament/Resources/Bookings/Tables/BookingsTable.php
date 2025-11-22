@@ -3,9 +3,11 @@
 namespace App\Filament\Resources\Bookings\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -14,12 +16,35 @@ class BookingsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('user.name')
+            ->columns(self::schema())
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function schema(): array
+    {
+        return
+            [
+                ImageColumn::make('listing.images')
+                    ->label(''),
+                TextColumn::make('listing.title')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('listing_id')
-                    ->numeric()
+                TextColumn::make('user.name')
+                    ->label("Processed By")
+                    ->sortable(),
+                TextColumn::make('customer.name')
                     ->sortable(),
                 TextColumn::make('start_time')
                     ->dateTime()
@@ -37,18 +62,6 @@ class BookingsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ];
     }
 }

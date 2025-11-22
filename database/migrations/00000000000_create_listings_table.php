@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id(); 
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('type'); // room, service, event
