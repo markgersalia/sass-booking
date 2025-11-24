@@ -30,12 +30,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->profile()
-            ->spa()
-            ->font('Poppins')
-            ->path('admin')
-            ->login()
+            ->id('admin') 
             ->colors([
                 'primary' => Color::Blue,
             ])
@@ -70,9 +65,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->subNavigationPosition(SubNavigationPosition::End)
-            ->unsavedChangesAlerts()
+            ->unsavedChangesAlerts() 
             // ->topbar(false)
-            
+            ->brandName(env('APP_NAME'))
+            ->profile()
+            ->spa()
+            ->font('Poppins')
+            ->path('admin')
+            ->login()
             ;
     }
 }

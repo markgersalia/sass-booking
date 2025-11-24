@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Bookings\Schemas;
 
+use Dom\Text;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class BookingInfolist
 {
@@ -20,6 +22,8 @@ class BookingInfolist
                         ->columns(2)
                         ->schema([
 
+                            TextEntry::make('booking_number'),
+
                             ImageEntry::make('listing.images')
                                 ->label('Preview')
                                 ->square()->columnSpanFull(),
@@ -28,6 +32,11 @@ class BookingInfolist
                                 ->label('Listing')
                                 ->columnSpanFull()
                                 ->icon('heroicon-m-home'),
+
+
+                            TextEntry::make('price') 
+                                ->columnSpanFull()
+                                ->icon(Heroicon::OutlinedCurrencyDollar),
 
 
                             TextEntry::make('start_time')
@@ -40,8 +49,6 @@ class BookingInfolist
                                 ->label('End Time')
                                 ->dateTime()
                                 ->icon('heroicon-m-calendar-days'),
-
-
 
                             TextEntry::make('notes')
                                 ->placeholder('-')

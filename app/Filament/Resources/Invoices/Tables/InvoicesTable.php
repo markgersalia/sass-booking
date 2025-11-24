@@ -1,35 +1,39 @@
 <?php
 
-namespace App\Filament\Resources\Customers\Tables;
+namespace App\Filament\Resources\Invoices\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class CustomersTable
+class InvoicesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
-                ->defaultImageUrl('https://www.gravatar.com/avatar/?d=mp')
-                ->circular(),
-                TextColumn::make('name')
+                TextColumn::make('invoice_number')
                     ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(),
-                TextColumn::make('phone')
-                    ->searchable(),
-                IconColumn::make('is_vip')
-                    ->boolean(),
-                // TextColumn::make()
+                TextColumn::make('customer.name')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('booking.booking_number')
+                    ->numeric()
+                    ->sortable(), 
+                TextColumn::make('amount')
+                    ->prefix('P')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('invoice_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('due_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->badge(), 
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -43,7 +47,6 @@ class CustomersTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
             ])
             ->toolbarActions([

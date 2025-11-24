@@ -22,7 +22,16 @@ class ListingResource extends Resource
     protected static ?string $model = Listing::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ListBullet;
-
+    
+    public static function canAccess(): bool
+{
+    return config('booking.has_listings') === true;
+}
+    
+    public static function shouldRegisterNavigation(): bool
+    {
+        return config('booking.has_listings') === true;
+    }
     public static function form(Schema $schema): Schema
     {
         return ListingForm::configure($schema);

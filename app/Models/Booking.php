@@ -20,6 +20,9 @@ class Booking extends Model implements Eventable
         'end_time',
         'status',      // pending, confirmed, canceled, completed
         'notes',
+        'title',
+        'price',
+        'type'
     ];
 
 
@@ -82,7 +85,7 @@ class Booking extends Model implements Eventable
     {
         return CalendarEvent::make($this)
             ->action('edit')
-            ->title("{$this->status} - {$this?->listing?->title} - {$this->customer->name} ")
+            ->title("{$this?->listing?->title} {$this->title} to  {$this->customer->name} ")
             ->start($this->start_time)
             ->end($this->end_time)
             ->extendedProp('customer_name', $this->customer->name) 

@@ -37,9 +37,24 @@ class BookingsTable
         return
             [
                 ImageColumn::make('listing.images')
-                    ->label(''),
+                    ->label('')
+                    ->visible(config('booking.has_listings')),
                 TextColumn::make('listing.title')
                     ->numeric()
+                    ->visible(config('booking.has_listings'))
+                    ->sortable(),
+                    
+                TextColumn::make('title')
+                    ->numeric()
+                    ->visible(!config('booking.has_listings'))
+                    ->sortable(),
+                TextColumn::make('price')
+                    ->numeric()
+                    ->visible(!config('booking.has_listings'))
+                    ->sortable(),
+                TextColumn::make('type')
+                    ->numeric()
+                    ->visible(!config('booking.has_listings'))
                     ->sortable(),
                 TextColumn::make('user.name')
                     ->label("Processed By")
