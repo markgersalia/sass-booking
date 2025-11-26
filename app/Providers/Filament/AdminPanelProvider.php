@@ -73,6 +73,8 @@ class AdminPanelProvider extends PanelProvider
             ->font('Poppins')
             ->path('admin')
             ->login()
+            ->authGuard('web')
+
             ;
     }
 }

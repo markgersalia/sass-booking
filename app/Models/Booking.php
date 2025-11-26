@@ -5,11 +5,13 @@ namespace App\Models;
 use Guava\Calendar\Contracts\Eventable;
 use Guava\Calendar\ValueObjects\CalendarEvent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str as SupportStr;
 use Psy\Util\Str;
 
 class Booking extends Model implements Eventable
 {
+    use SoftDeletes;
     //
     protected $fillable = [
         'user_id',     // who booked
@@ -22,7 +24,8 @@ class Booking extends Model implements Eventable
         'notes',
         'title',
         'price',
-        'type'
+        'type',
+        'location',
     ];
 
 
@@ -85,7 +88,7 @@ class Booking extends Model implements Eventable
     {
         return CalendarEvent::make($this)
             ->action('edit')
-            ->title("{$this?->listing?->title} {$this->title} to  {$this->customer->name} ")
+            ->title("{$this?->listing?->title} {$this?->title} {$this?->location} ")
             ->start($this->start_time)
             ->end($this->end_time)
             ->extendedProp('customer_name', $this->customer->name) 

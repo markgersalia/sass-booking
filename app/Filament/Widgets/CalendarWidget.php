@@ -30,19 +30,20 @@ class CalendarWidget extends FilamentCalendarWidget
         return parent::getHeaderActions();
     }
 
+
+    
     public function createBookingAction(): CreateAction
     {
         return $this->createAction(\App\Models\Booking::class)
             ->label('Create Booking')
-            // ->mutateDataUsing(function (array $data) {
+            ->mutateDataUsing(function (array $data) {
+ 
+                // dd($data['start_time'], $livewire);
+                // $data['start_time'] = $livewire->clickedDate;
+                // $data['end_time']   = now()->parse($livewire->clickedDate)->addHour();
 
-            //     dd($data);
-            //     // dd($data['start_time'], $livewire);
-            //     // $data['start_time'] = $livewire->clickedDate;
-            //     // $data['end_time']   = now()->parse($livewire->clickedDate)->addHour();
-
-            //     return $data;
-            // })
+                return $data;
+            })
             ->after(function () {
                 $this->refreshRecords();
             });
@@ -55,7 +56,7 @@ class CalendarWidget extends FilamentCalendarWidget
             $this->createBookingAction(),
             // Any other action you want
         ];
-    }
+    } 
 
     public function createFooAction(): CreateAction
     {
@@ -93,4 +94,5 @@ class CalendarWidget extends FilamentCalendarWidget
             ->whereDate('end_time', '>=', $info->start)
             ->whereDate('start_time', '<=', $info->end);
     }
+    
 }

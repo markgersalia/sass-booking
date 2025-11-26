@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'has_listings' => true,
+    'has_listings' => false,
 ];

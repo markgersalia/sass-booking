@@ -15,18 +15,11 @@ class ListingSeeder extends Seeder
      */
     public function run(): void
 {
-           $typeTitles = [
-            'room' => ['Deluxe Room', 'Cozy Private Room', 'Modern Guest Room'],
+           $typeTitles = [ 
             'service' => ['Premium Cleaning Service', 'Car Wash Package', 'Massage Service'],
             'event' => ['Corporate Event Hall', 'Wedding Venue', 'Birthday Party Space'],
             'apartment' => ['1BR City Apartment', 'Modern Loft Apartment', 'Penthouse Suite'],
-            'house' => ['Family Home Rental', 'Modern Smart House', 'Suburban Home'],
-            'studio' => ['Creative Art Studio', 'Photography Studio', 'Sound Recording Studio'],
-            'transport' => ['Car Rental', 'Motorbike Rental', 'Private Van Service'],
-            'equipment' => ['Camera Equipment Rental', 'Construction Tools Rental', 'Sound System Rental'],
-            'experience' => ['City Tour Experience', 'Mountain Hiking Package', 'Diving Experience'],
-            'misc' => ['General Rental Item', 'Basic Package', 'Custom Misc Service'],
-            'medical' => ['Medical Checkup', 'Dental Checkup', 'Laboratory Test Package']
+            'house' => ['Family Home Rental', 'Modern Smart House', 'Suburban Home'], 
         ];
 
     // Add medical into types list

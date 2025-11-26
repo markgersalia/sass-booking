@@ -54,8 +54,8 @@ class BookingForm
                             ->columnSpanFull()
                             ->numeric()
                             ->helperText('Set the price for this booking. '),
-                    ])->hidden(config('booking.has_listings'))->columns(2)
-                ]),
+                    ])->columns(2)
+                ])->hidden(config('booking.has_listings')),
                 Section::make([
 
                     Select::make('customer_id')
@@ -106,6 +106,8 @@ class BookingForm
                         ->numeric()
                         ->hidden(!config('booking.has_listings'))
                         ->helperText('Set the price for this booking. '),
+                    Textarea::make('location')
+                        ->columnSpanFull(),
                     Textarea::make('notes')
                         ->columnSpanFull(),
                 ])->columns(2),
